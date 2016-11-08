@@ -59,21 +59,24 @@ export default class Home extends Component {
 
 	render() {
 		console.log( this.state.recipeBook );
+		const recipeBookData = this.state.recipeBook;
 		return (
 			<div className="container">
 				<div className="row">
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
 					<Accordion>
-						{this.state.recipeBook.map( (obj, index) => {
+						{recipeBookData.map( (obj, index) => {
 							return (
 							    <Panel header={obj.recipeTitle} key={index} eventKey={index}>
 							    	<h4 className="text-center">Ingredients</h4>
 							    	<hr/>
 							    	<ListGroup>
-									    <ListGroupItem>Tepung</ListGroupItem>
-									    <ListGroupItem>Ayam</ListGroupItem>
-									    <ListGroupItem>Micin</ListGroupItem>
+							    		{obj.recipeIngredients.map( ingredient => {
+							    			return (
+							    				<ListGroupItem>{ingredient}</ListGroupItem>
+							    			);
+							    		})}
 									</ListGroup>
 									<Button bsStyle="danger">Delete</Button>
 									<Button>Edit</Button>

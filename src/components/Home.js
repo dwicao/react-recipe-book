@@ -54,28 +54,34 @@ export default class Home extends Component {
 			}])
 		});
 		localStorage.setItem('recipeBook', JSON.stringify(recipeBookState));
+		this.close();
 	}
 
 	render() {
-		console.log( JSON.stringify(this.state.recipeBook) );
+		console.log( this.state.recipeBook );
 		return (
 			<div className="container">
 				<div className="row">
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
 					<Accordion>
-					    <Panel header="ayam goreng" eventKey="1">
-					    	<h4 className="text-center">Ingredients</h4>
-					    	<hr/>
-					    	<ListGroup>
-							    <ListGroupItem>Tepung</ListGroupItem>
-							    <ListGroupItem>Ayam</ListGroupItem>
-							    <ListGroupItem>Micin</ListGroupItem>
-							</ListGroup>
-							<Button bsStyle="danger">Delete</Button>
-							<Button>Edit</Button>
-					    </Panel>
+						{this.state.recipeBook.map( (obj, index) => {
+							return (
+							    <Panel header={obj.recipeTitle} key={index} eventKey={index}>
+							    	<h4 className="text-center">Ingredients</h4>
+							    	<hr/>
+							    	<ListGroup>
+									    <ListGroupItem>Tepung</ListGroupItem>
+									    <ListGroupItem>Ayam</ListGroupItem>
+									    <ListGroupItem>Micin</ListGroupItem>
+									</ListGroup>
+									<Button bsStyle="danger">Delete</Button>
+									<Button>Edit</Button>
+							    </Panel>
+							);
+						})}
 					</Accordion>
+
 					<Button onClick={this.open} bsStyle="primary">Add Recipe</Button>
 					
 					<Modal show={this.state.showModal} onHide={this.close}>

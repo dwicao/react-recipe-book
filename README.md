@@ -1,2 +1,1 @@
-just for fun project
-# recipe-box
+# Under Development

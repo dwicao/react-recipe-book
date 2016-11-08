@@ -20,13 +20,16 @@ export default class Home extends Component {
 
 		const recipeBook = JSON.parse(localStorage.getItem('recipeBook')) || [];
 		this.state = {
-			showModal: false,
+			showModalAdd: false,
+			showModalEdit: false,
 			id: 0,
 			recipeBook
 		};
 
-		this.close = this.close.bind(this);
-		this.open = this.open.bind(this);
+		this.closeModalAdd = this.closeModalAdd.bind(this);
+		this.closeModalEdit = this.closeModalEdit.bind(this);
+		this.openModalAdd = this.openModalAdd.bind(this);
+		this.openModalEdit = this.openModalEdit.bind(this);
 		this.addRecipe = this.addRecipe.bind(this);
 	}
 
@@ -34,12 +37,24 @@ export default class Home extends Component {
 		localStorage.setItem('recipeBook', JSON.stringify(this.state.recipeBook));
 	}
 
-	close() {
-		this.setState({ showModal: false })
+	closeModalAdd() {
+		this.setState({ showModalAdd: false })
 	}
 
-	open() {
-		this.setState({ showModal: true })
+	closeModalEdit() {
+		this.setState({ showModalEdit: false })
+	}
+
+	openModalAdd() {
+		this.setState({ showModalAdd: true })
+	}
+
+	openModalEdit() {
+		this.setState({ showModalEdit: true })
+	}
+
+	editRecipe() {
+		console.log('editRecipe clicked');
 	}
 
 	addRecipe() {
@@ -54,7 +69,7 @@ export default class Home extends Component {
 			}])
 		});
 		localStorage.setItem('recipeBook', JSON.stringify(recipeBookState));
-		this.close();
+		this.closeModalAdd();
 	}
 
 	render() {
@@ -79,15 +94,15 @@ export default class Home extends Component {
 							    		})}
 									</ListGroup>
 									<Button bsStyle="danger">Delete</Button>
-									<Button>Edit</Button>
+									<Button onClick={this.openModalEdit}>Edit</Button>
 							    </Panel>
 							);
 						})}
 					</Accordion>
 
-					<Button onClick={this.open} bsStyle="primary">Add Recipe</Button>
+					<Button onClick={this.openModalAdd} bsStyle="primary">Add Recipe</Button>
 					
-					<Modal show={this.state.showModal} onHide={this.close}>
+					<Modal show={this.state.showModalAdd} onHide={this.closeModalAdd}>
 			          <Modal.Header closeButton>
 			            <Modal.Title>Add Recipe</Modal.Title>
 			          </Modal.Header>
@@ -105,7 +120,29 @@ export default class Home extends Component {
 			          </Modal.Body>
 			          <Modal.Footer>
 			          	<Button onClick={this.addRecipe} bsStyle="primary">Add Recipe</Button>
-			            <Button onClick={this.close}>Close</Button>
+			            <Button onClick={this.closeModalAdd}>Close</Button>
+			          </Modal.Footer>
+			        </Modal>
+
+			        <Modal show={this.state.showModalEdit} onHide={this.closeModalEdit}>
+			          <Modal.Header closeButton>
+			            <Modal.Title>Edit Recipe</Modal.Title>
+			          </Modal.Header>
+			          <Modal.Body>
+						  <form>
+						    <FormGroup>
+						      <ControlLabel>Recipe</ControlLabel>
+						      <FormControl type="text" ref="editRecipeTitle" placeholder="Recipe Name" />
+						    </FormGroup>
+						    <FormGroup controlId="formControlsTextarea">
+						      <ControlLabel>Ingredients</ControlLabel>
+						      <FormControl ref="editRecipeIngredients" style={{resize:'vertical'}} componentClass="textarea" placeholder="Enter Ingredients,Separated,By Commas" />
+						    </FormGroup>
+						  </form>
+			          </Modal.Body>
+			          <Modal.Footer>
+			          	<Button onClick={this.editRecipe} bsStyle="primary">Edit Recipe</Button>
+			            <Button onClick={this.closeModalEdit}>Close</Button>
 			          </Modal.Footer>
 			        </Modal>
 				</div>

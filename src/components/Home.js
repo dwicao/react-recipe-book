@@ -18,15 +18,20 @@ export default class Home extends Component {
 	constructor(props) {
 		super(props);
 
+		const recipeBook = JSON.parse(localStorage.getItem('recipeBook')) || [];
 		this.state = {
 			showModal: false,
 			id: 0,
-			recipeBook: []
+			recipeBook
 		};
 
 		this.close = this.close.bind(this);
 		this.open = this.open.bind(this);
 		this.addRecipe = this.addRecipe.bind(this);
+	}
+
+	componentDidUpdate() {
+		localStorage.setItem('recipeBook', JSON.stringify(this.state.recipeBook));
 	}
 
 	close() {
@@ -40,14 +45,15 @@ export default class Home extends Component {
 	addRecipe() {
 		const recipeTitle = findDOMNode(this.refs.recipeTitle).value;
 		const recipeIngredients = findDOMNode(this.refs.recipeIngredients).value.split(',');
+		const recipeBookState = this.state.recipeBook;
 		this.setState({
-			recipeBook: this.state.recipeBook.concat([{
+			recipeBook: recipeBookState.concat([{
 				id: this.state.id++,
 				recipeTitle,
 				recipeIngredients
 			}])
 		});
-		localStorage.setItem('recipeBook', JSON.stringify(this.state.recipeBook));
+		localStorage.setItem('recipeBook', JSON.stringify(recipeBookState));
 	}
 
 	render() {

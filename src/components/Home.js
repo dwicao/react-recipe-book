@@ -47,8 +47,6 @@ export default class Home extends Component {
 	}
 
 	render() {
-	//	console.log( 'recipeBook:', JSON.stringify(this.state.recipeBook) );
-	//	console.log('tempIngredients:', this.state.tempIngredients);
 		return (
 			<div className="container">
 				<div className="row">

@@ -12,6 +12,7 @@ export default class ModalAddRecipe extends Component {
 		super(props);
 
 		this.onChangeRecipeName = this.onChangeRecipeName.bind(this);
+		this.onChangeIngredients = this.onChangeIngredients.bind(this);
 		this.addRecipe = this.addRecipe.bind(this);
 	}
 
@@ -19,18 +20,24 @@ export default class ModalAddRecipe extends Component {
 		this.props.onChangeRecipeName(event.target.value);
 	}
 
+	onChangeIngredients(event) {
+		this.props.onChangeIngredients(event.target.value);
+	}
+
 	addRecipe() {
 		const tempName = this.props.tempName;
-		const tempIngredients = this.props.tempIngredients;
+		const tempIngredients = this.props.tempIngredients.split(',');
 		
 		this.props.recipeBook.push({
-			recipeTitle: tempName
+			recipeTitle: tempName,
+			ingredients: tempIngredients
 		});
 
-		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook) );
+		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook));
 
 		this.props.clearTempName();
 
+		this.props.hideModal();
 	}
 
 	render() {
@@ -51,7 +58,7 @@ export default class ModalAddRecipe extends Component {
 				    </FormGroup>
 				    <FormGroup>
 	            		<ControlLabel>Ingredients</ControlLabel>
-				    	<FormControl style={{resize: 'vertical'}} componentClass="textarea" placeholder="Enter Ingredients,Separated,By Commas" />
+				    	<FormControl onChange={this.onChangeIngredients} style={{resize: 'vertical'}} componentClass="textarea" placeholder="Enter Ingredients,Separated,By Commas" />
 				    </FormGroup>
 	            </form>
 	          </Modal.Body>

@@ -44,7 +44,8 @@ export default class Home extends Component {
 				<div className="row">
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
-					<RecipePanel />
+					<RecipePanel
+						recipeBook={this.state.recipeBook} />
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}
 						onChangeIngredients={this.onChangeIngredients}

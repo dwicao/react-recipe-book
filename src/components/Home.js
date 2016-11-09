@@ -8,6 +8,7 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
+			id: 0,
 			tempName: '',
 			tempIngredients: '',
 			recipeBook: JSON.parse(localStorage.getItem('recipeBook')) || []
@@ -17,6 +18,7 @@ export default class Home extends Component {
 		this.onChangeIngredients = this.onChangeIngredients.bind(this);
 		this.clearTempName = this.clearTempName.bind(this);
 		this.clearTempIngredients = this.clearTempIngredients.bind(this);
+		this.setIdByIndex = this.setIdByIndex.bind(this);
 	}
 
 	onChangeRecipeName(value) {
@@ -35,6 +37,10 @@ export default class Home extends Component {
 		this.setState({ tempIngredients: '' });
 	}
 
+	setIdByIndex(index) {
+		this.setState({ id: index });
+	}
+
 	render() {
 	//	console.log( 'recipeBook:', JSON.stringify(this.state.recipeBook) );
 	//	console.log('tempIngredients:', this.state.tempIngredients);
@@ -50,7 +56,9 @@ export default class Home extends Component {
 						clearTempIngredients={this.clearTempIngredients}
 						tempName={this.state.tempName}
 						tempIngredients={this.state.tempIngredients}
-						recipeBook={this.state.recipeBook} 
+						recipeBook={this.state.recipeBook}
+						id={this.state.id} 
+						setIdByIndex={this.setIdByIndex}
 					/>
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}

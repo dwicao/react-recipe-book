@@ -13,6 +13,7 @@ export default class ModalEditRecipe extends Component {
 
 		this.displayRecipeName = this.displayRecipeName.bind(this);
 		this.displayIngredients = this.displayIngredients.bind(this);
+		this.editRecipe = this.editRecipe.bind(this);
 	}
 
 	displayRecipeName(event) {
@@ -21,6 +22,20 @@ export default class ModalEditRecipe extends Component {
 
 	displayIngredients(event) {
 		this.props.onChangeIngredients(event.target.value);
+	}
+
+	editRecipe() {
+		const index = this.props.id;
+		const tempIngredients = this.props.tempIngredients;
+		const storageIngredients = this.props.recipeBook[index].ingredients;
+		const ingredientToArray = (tempIngredients === storageIngredients) ? storageIngredients : this.props.tempIngredients.split(',');
+
+		this.props.recipeBook[index].recipeTitle = this.props.tempName;
+		this.props.recipeBook[index].ingredients = ingredientToArray;
+		
+		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook));
+		
+		this.props.hideModal();
 	}
 
 	render() {
@@ -57,7 +72,7 @@ export default class ModalEditRecipe extends Component {
 	            </form>
 	          </Modal.Body>
 	          <Modal.Footer>
-	          	<Button bsStyle="primary">Edit Recipe</Button>
+	          	<Button onClick={this.editRecipe} bsStyle="primary">Edit Recipe</Button>
 	            <Button onClick={this.props.hideModal}>Close</Button>
 	          </Modal.Footer>
         	</Modal>
@@ -71,5 +86,7 @@ ModalEditRecipe.propTypes = {
 	onChangeRecipeName: PropTypes.func.isRequired,
 	onChangeIngredients: PropTypes.func.isRequired,
 	tempName: PropTypes.string.isRequired,
-	tempIngredients: PropTypes.string.isRequired
+	tempIngredients: PropTypes.string.isRequired,
+	recipeBook: PropTypes.array.isRequired,
+	id: PropTypes.number.isRequired
 };

@@ -25,7 +25,7 @@ export default class ModalAddRecipe extends Component {
 	}
 
 	addRecipe() {
-		const tempName = this.props.tempName;
+		const tempName = this.props.tempName.length < 1 ? 'Untitled' : this.props.tempName;
 		const tempIngredients = this.props.tempIngredients.split(',');
 		
 		this.props.recipeBook.push({
@@ -36,7 +36,7 @@ export default class ModalAddRecipe extends Component {
 		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook));
 
 		this.props.clearTempName();
-
+		this.props.clearTempIngredients();
 		this.props.hideModal();
 	}
 

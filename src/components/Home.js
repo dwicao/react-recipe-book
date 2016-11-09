@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RecipePanel from './RecipePanel';
 import AddRecipe from './AddRecipe';
-import {styles} from './Home_style';
 
 
 export default class Home extends Component {
@@ -45,7 +44,8 @@ export default class Home extends Component {
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
 					<RecipePanel
-						recipeBook={this.state.recipeBook} />
+						recipeBook={this.state.recipeBook} 
+					/>
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}
 						onChangeIngredients={this.onChangeIngredients}
@@ -53,7 +53,8 @@ export default class Home extends Component {
 						clearTempIngredients={this.clearTempIngredients}
 						tempName={this.state.tempName}
 						tempIngredients={this.state.tempIngredients}
-						recipeBook={this.state.recipeBook} />
+						recipeBook={this.state.recipeBook} 
+					/>
 				</div>
 			</div>
 		);

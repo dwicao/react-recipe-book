@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ModalAddRecipe from './ModalAddRecipe';
 import { Button } from 'react-bootstrap';
 
@@ -28,6 +28,13 @@ export default class AddRecipe extends Component {
 				<ModalAddRecipe 
 					show={this.state.show}
 					hideModal={this.hideModal}
+					onChangeRecipeName={this.props.onChangeRecipeName}
+					onChangeIngredients={this.props.onChangeIngredients}
+					clearTempName={this.props.clearTempName}
+					clearTempIngredients={this.props.clearTempIngredients}
+					tempName={this.props.tempName}
+					tempIngredients={this.props.tempIngredients}
+					recipeBook={this.props.recipeBook}
 				/>
 				<Button bsStyle="primary" onClick={this.showModal}>
 					Add Recipe
@@ -36,3 +43,10 @@ export default class AddRecipe extends Component {
 		);
 	}
 }
+
+AddRecipe.propTypes = {
+	onChangeRecipeName: PropTypes.func.isRequired,
+	onChangeIngredients: PropTypes.func.isRequired,
+	clearTempName: PropTypes.func.isRequired,
+	clearTempIngredients: PropTypes.func.isRequired
+};

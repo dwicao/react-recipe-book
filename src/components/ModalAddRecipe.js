@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
 	Modal,
 	Button,
@@ -10,6 +10,27 @@ import {
 export default class ModalAddRecipe extends Component {
 	constructor(props) {
 		super(props);
+
+		this.onChangeRecipeName = this.onChangeRecipeName.bind(this);
+		this.addRecipe = this.addRecipe.bind(this);
+	}
+
+	onChangeRecipeName(event) {
+		this.props.onChangeRecipeName(event.target.value);
+	}
+
+	addRecipe() {
+		const tempName = this.props.tempName;
+		const tempIngredients = this.props.tempIngredients;
+		
+		this.props.recipeBook.push({
+			recipeTitle: tempName
+		});
+
+		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook) );
+
+		this.props.clearTempName();
+
 	}
 
 	render() {
@@ -26,7 +47,7 @@ export default class ModalAddRecipe extends Component {
 	            <form>
 	            	<FormGroup>
 	            		<ControlLabel>Recipe</ControlLabel>
-				    	<FormControl type="text" placeholder="Recipe Name" />
+				    	<FormControl onChange={this.onChangeRecipeName} type="text" placeholder="Recipe Name" />
 				    </FormGroup>
 				    <FormGroup>
 	            		<ControlLabel>Ingredients</ControlLabel>
@@ -35,10 +56,19 @@ export default class ModalAddRecipe extends Component {
 	            </form>
 	          </Modal.Body>
 	          <Modal.Footer>
-	          	<Button bsStyle="primary">Add Recipe</Button>
+	          	<Button onClick={this.addRecipe} bsStyle="primary">Add Recipe</Button>
 	            <Button onClick={this.props.hideModal}>Close</Button>
 	          </Modal.Footer>
         	</Modal>
 		);
 	}
 }
+
+ModalAddRecipe.propTypes = {
+	show: PropTypes.bool.isRequired,
+	hideModal: PropTypes.func.isRequired,
+	onChangeRecipeName: PropTypes.func.isRequired,
+	onChangeIngredients: PropTypes.func.isRequired,
+	clearTempName: PropTypes.func.isRequired,
+	clearTempIngredients: PropTypes.func.isRequired
+};

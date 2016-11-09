@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RecipeList from './RecipeList';
+import RecipePanel from './RecipePanel';
 import AddRecipe from './AddRecipe';
 import {styles} from './Home_style';
 
@@ -44,7 +44,7 @@ export default class Home extends Component {
 				<div className="row">
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
-					<RecipeList />
+					<RecipePanel />
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}
 						onChangeIngredients={this.onChangeIngredients}

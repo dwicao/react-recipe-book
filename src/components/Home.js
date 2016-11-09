@@ -75,6 +75,7 @@ export default class Home extends Component {
 						tempIngredients={this.state.tempIngredients}
 						recipeBook={this.state.recipeBook} 
 					/>
+					<p style={{color: 'gray'}} className="text-center">Lutfian Dwi Cahyono</p>
 				</div>
 			</div>
 		);

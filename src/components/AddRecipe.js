@@ -48,5 +48,8 @@ AddRecipe.propTypes = {
 	onChangeRecipeName: PropTypes.func.isRequired,
 	onChangeIngredients: PropTypes.func.isRequired,
 	clearTempName: PropTypes.func.isRequired,
-	clearTempIngredients: PropTypes.func.isRequired
+	clearTempIngredients: PropTypes.func.isRequired,
+	tempName: PropTypes.string.isRequired,
+	tempIngredients: PropTypes.string.isRequired,
+	recipeBook: PropTypes.array.isRequired
 };

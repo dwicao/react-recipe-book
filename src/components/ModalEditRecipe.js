@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
 	Modal,
 	Button,
@@ -42,3 +42,8 @@ export default class ModalEditRecipe extends Component {
 		);
 	}
 }
+
+ModalEditRecipe.propTypes = {
+	show: PropTypes.bool.isRequired,
+	hideModal: PropTypes.func.isRequired
+};

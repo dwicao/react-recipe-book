@@ -19,6 +19,7 @@ export default class Home extends Component {
 		this.clearTempName = this.clearTempName.bind(this);
 		this.clearTempIngredients = this.clearTempIngredients.bind(this);
 		this.setIdByIndex = this.setIdByIndex.bind(this);
+		this.reRender = this.reRender.bind(this);
 	}
 
 	onChangeRecipeName(value) {
@@ -41,6 +42,10 @@ export default class Home extends Component {
 		this.setState({ id: index });
 	}
 
+	reRender() {
+		this.setState(this.state);
+	}
+
 	render() {
 	//	console.log( 'recipeBook:', JSON.stringify(this.state.recipeBook) );
 	//	console.log('tempIngredients:', this.state.tempIngredients);
@@ -59,6 +64,7 @@ export default class Home extends Component {
 						recipeBook={this.state.recipeBook}
 						id={this.state.id} 
 						setIdByIndex={this.setIdByIndex}
+						reRender={this.reRender}
 					/>
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}

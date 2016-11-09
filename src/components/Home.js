@@ -44,6 +44,12 @@ export default class Home extends Component {
 					<h1 className="text-center">Recipe Book</h1>
 					<h4 className="text-center">Data is saved in browser's local storage</h4>
 					<RecipePanel
+						onChangeRecipeName={this.onChangeRecipeName}
+						onChangeIngredients={this.onChangeIngredients}
+						clearTempName={this.clearTempName}
+						clearTempIngredients={this.clearTempIngredients}
+						tempName={this.state.tempName}
+						tempIngredients={this.state.tempIngredients}
 						recipeBook={this.state.recipeBook} 
 					/>
 					<AddRecipe

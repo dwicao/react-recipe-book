@@ -17,9 +17,7 @@ export default class RecipePanel extends Component {
 			show: false
 		};
 
-		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
-		this.deleteRecipe = this.deleteRecipe.bind(this);
 	}
 
 	showModal(index) {

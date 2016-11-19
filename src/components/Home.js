@@ -19,7 +19,6 @@ export default class Home extends Component {
 		this.clearTempName = this.clearTempName.bind(this);
 		this.clearTempIngredients = this.clearTempIngredients.bind(this);
 		this.setIdByIndex = this.setIdByIndex.bind(this);
-		this.reRender = this.reRender.bind(this);
 	}
 
 	onChangeRecipeName(value) {
@@ -42,10 +41,6 @@ export default class Home extends Component {
 		this.setState({ id: index });
 	}
 
-	reRender() {
-		this.setState(this.state);
-	}
-
 	render() {
 		return (
 			<div className="container">
@@ -60,9 +55,8 @@ export default class Home extends Component {
 						tempName={this.state.tempName}
 						tempIngredients={this.state.tempIngredients}
 						recipeBook={this.state.recipeBook}
-						id={this.state.id} 
+						id={this.state.id}
 						setIdByIndex={this.setIdByIndex}
-						reRender={this.reRender}
 					/>
 					<AddRecipe
 						onChangeRecipeName={this.onChangeRecipeName}
@@ -71,7 +65,7 @@ export default class Home extends Component {
 						clearTempIngredients={this.clearTempIngredients}
 						tempName={this.state.tempName}
 						tempIngredients={this.state.tempIngredients}
-						recipeBook={this.state.recipeBook} 
+						recipeBook={this.state.recipeBook}
 					/>
 					<p style={{color: 'gray'}} className="text-center">Lutfian Dwi Cahyono</p>
 				</div>

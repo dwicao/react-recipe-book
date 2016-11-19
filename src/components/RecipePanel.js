@@ -41,7 +41,7 @@ export default class RecipePanel extends Component {
 	deleteRecipe(index) {
 		this.props.recipeBook.splice(index, 1);
 		localStorage.setItem('recipeBook', JSON.stringify(this.props.recipeBook));
-		this.props.reRender();
+		this.setState(this.state);
 	}
 
 	render() {
@@ -87,7 +87,6 @@ RecipePanel.propTypes = {
 	tempName: PropTypes.string.isRequired,
 	tempIngredients: PropTypes.string.isRequired,
 	recipeBook: PropTypes.array.isRequired,
-	id: PropTypes.number.isRequired, 
-	setIdByIndex: PropTypes.func.isRequired,
-	reRender: PropTypes.func.isRequired
+	id: PropTypes.number.isRequired,
+	setIdByIndex: PropTypes.func.isRequired
 };
